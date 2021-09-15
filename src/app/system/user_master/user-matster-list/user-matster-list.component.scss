@@ -1,0 +1,18 @@
+.field-view {
+    // display: flex;
+    align-items: center;
+    margin-right: 17px;
+}
+
+.field-view label {
+    font-size: 14px;
+    font-weight: 600;
+}
+:host ::ng-deep .p-dropdown{
+    margin-left: 10px !important;
+    width: 175px !important;
+}
+
+:host ::ng-deep .p-dropdown-label{
+    padding: 3px !important;
+}

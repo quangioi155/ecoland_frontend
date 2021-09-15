@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="block_header">
+    <a routerLink=""></a>
+    <div class="block_header_search">
+        <div class="block_first">
+            <label for="" style="font-size: 14px;">エコNo</label>
+            <input type="text" pInputText class="p-field" style="font-size: 14px; padding: 3px;">
+            <button pButton type="button" icon="pi pi-search" label="案件検索" class="p-button-secondary" style="font-size: 14px; padding: 3px 12px;"></button>
+        </div>
+        <div class="block_second" [style]="{'margin-left': '10px'}">
+            <label for="" style="font-size: 14px;">電話番号</label>
+            <input type="text" pInputText style="font-size: 14px; padding: 3px;">
+            <button pButton icon="pi pi-search" type="button" label="顧客検索" class="p-button-secondary" style="font-size: 14px; padding: 3px 12px;"></button>
+        </div>
+    </div>
+</div>
+
+<div class="menu-bar">
+    <ul [ngClass]="rules.length == 7 ? 'full-role' : 'less-role'">
+        <li *ngIf ="isReception"><a routerLink="./">{{menu.CUSTOMER}}</a></li>
+        <li *ngIf ="isDriver"><a routerLink="./">{{menu.DRIVER}}</a></li>
+        <li *ngIf ="isVehicleDispatch"><a routerLink="./">{{menu.DISPATCH_VERHICLE}}</a></li>
+        <li *ngIf ="isZec"><a routerLink="./">{{menu.ZEC}}</a></li>
+        <li *ngIf ="isManager"><a routerLink="./">{{menu.MANAGER}}</a></li>
+        <li *ngIf ="isWareHouse"><a routerLink="./">{{menu.WAREHOUSE}}</a></li>
+        <li *ngIf ="isSystemAdmin"><a routerLink="./">{{menu.SYSTEM}}</a>
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a routerLink="/ecoland/user-list">{{systemMenu.USER_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/authority-list">{{systemMenu.USER_GROUP_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/partner-list">{{systemMenu.COMPANY_GROUP_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/branch-list">{{systemMenu.MASTER_BASE}}</a></li>
+                    <li><a routerLink="/ecoland/rank-list">{{systemMenu.PRODUCT_RANK_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/web_categ1-list">{{systemMenu.WEB_LG_CATG_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/web_categ2-list">{{systemMenu.WEB_SM_CATG_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/product-category-list">{{systemMenu.PRODUCT_CATG_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/oem-type-list">{{systemMenu.OEM_TYPE_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/OEM_mapping-list">{{systemMenu.OEM_MAPPING_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/introduction-list">{{systemMenu.PARTNER_COMPANY_MASTER}}</a></li>
+                    <li><a routerLink="/ecoland/introduction-site-list">{{systemMenu.PARTNER_COMPANY_LIST}}</a></li>
+                    <li><a href="#">{{systemMenu.MASTER_MEDIA}}</a></li>
+                    <li><a href="#">{{systemMenu.OUTSOURCE_MASTER}}</a></li>
+                    <li><a href="#">{{systemMenu.OUTSOURCE_SERVICE_MASTER}}</a></li>
+                    <li><a href="#">{{systemMenu.MAIN_TEMPLATE_MASTER}}</a></li>
+                    <li><a href="#">{{systemMenu.ZEC_MASTER}}</a></li>
+                    <li><a href="#">{{systemMenu.TAX_MASTER}}</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- begin content render -->
+
+<!-- end content render -->
+
+<router-outlet></router-outlet>
+<app-footer></app-footer>

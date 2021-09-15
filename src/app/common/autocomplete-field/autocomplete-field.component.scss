@@ -1,0 +1,19 @@
+.field-view {
+    display: flex;
+    align-items: center;
+    margin-right: 17px;
+  }
+  
+  .field-view label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  :host ::ng-deep .custom-dp {
+    margin-left: 10px;
+    width: 175px;
+  }
+  
+  :host ::ng-deep .custom-dp .p-autocomplete-input{
+    padding: 3px;
+  }

@@ -1,0 +1,26 @@
+.topnav {
+    background: #009FA4 url('/assets/img/status_bg.gif') no-repeat;
+    min-height: 26px;
+    padding: 5px 10px 0px 10px;
+    text-align: right;
+    width: 100%;
+}
+.pi-sign-out {
+    font-size: 0.6rem;
+    border: 1px solid;
+    padding: 2px 5px 2px 5px;
+    background: white;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+}
+label {
+    margin-right: 5px;
+}
+p {
+    display: contents;
+}
+span {
+    margin-right: 5px;
+    color: white;
+}

@@ -1,0 +1,38 @@
+// .search-field {
+//     padding: 0px 10px 5px 10px;
+// }
+
+// .search-btn {
+//     padding: 3px 12px;
+//     font-size: 14px;
+// }
+
+// .del-btn {
+//     margin-right: 10px;
+//     padding: 3px 12px;
+//     font-size: 14px;
+// }
+:host::ng-deep {
+    .check-box-customer-css {
+        display: block;
+        float: left;
+        margin-right: 20px;
+    }
+}
+.block-search {
+    border: 1px solid #ced4da;
+    padding: 3px;
+    border-radius: 3px;
+    margin-right: 17px;
+}
+label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+.css-left {
+    margin-left: 10px;
+}
+:host ::ng-deep .p-radiobutton-icon {
+    transform: translateZ(0) scale(0.8,0.8) !important;
+}

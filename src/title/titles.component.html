@@ -1,0 +1,62 @@
+<div>
+ 
+  <table id="customers" style="border-collapse: collapse;">
+    <tr>
+      <th>タイトル</th>
+      <th>Id</th>
+      <th>
+        パートナー企業
+        <mat-icon style="cursor: pointer;" (click)="sortByCode('down')">
+          arrow_downward
+        </mat-icon>
+        <mat-icon style="cursor: pointer;" (click)="sortByCode('up')">
+          arrow_upward
+        </mat-icon>
+      </th>
+      <th> 外注企業名</th>
+      <th>外注企業略称</th>
+      <th>外注企業略称</th>
+      <th>郵便番号</th>
+      <th>住所1</th>
+      <th>住所2/th>
+        <th>住所3/th>
+          <th>電話番号/th>
+            <th>FAX番号/th>
+              <th>「戻る」</th>
+                <th>「登録」</th>
+    </tr>
+    <tr *ngFor="let student of titles">
+      <td>
+        <mat-icon
+          style="cursor: pointer;"
+          title="Nhấn vào để xóa"
+          (click)="deleteStudent(titles.id)"
+        >
+          clear
+        </mat-icon>
+        &nbsp;
+        <mat-icon
+          style="cursor: pointer;"
+          title="Nhấn vào để soạn"
+          (click)="editStudent(titles.id)"
+        >
+          create
+        </mat-icon>
+      </td>
+      <td>{{ title?.title }}</td>
+      <td>{{ title?.id }}</td>
+      <td>{{ titlet?.partner }}</td>
+      <td>{{ title?.outsource }}</td>
+      <td>{{ title?.outsoure }}</td>
+      <td>{{ title?.number }}</td>
+      <td>{{ title?.address1 }}</td>
+      <td align="center">
+        <img
+          *ngIf="student?.picture"
+          src="{{ student?.picture }}"
+          height="50"
+        />
+      </td>
+    </tr>
+  </table>
+</div>

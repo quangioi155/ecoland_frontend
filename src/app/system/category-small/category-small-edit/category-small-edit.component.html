@@ -1,0 +1,56 @@
+<title-component [title]="titleName"></title-component>
+<div appContainer>
+  <form [formGroup]="editForm">
+    <p-table styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 15%">ID</th>
+          <th>{{id}}</th>
+        </tr>
+        <tr>
+          <th style="background-color: white">大カテゴリ</th>
+          <th style="background-color: white">
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="dropdownlistLargeCate"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="largeCategoryId" [ngClass]="{ 'ng-dirty': submitted && f.largeCategoryId.errors }">
+            </p-dropdown>
+            <div *ngIf="(f.largeCategoryId.invalid ) && (submitted && f.largeCategoryId.errors)" class="p-error">
+              <div *ngIf="f.largeCategoryId.errors">{{validation.MES_9}}</div>
+            </div>
+          </th>
+
+        </tr>
+
+        <tr>
+          <th>小カテゴリ</th>
+          <th>
+            <input type="text" pInputText [style]="{ width: '30%' }" maxlength="20" formControlName="categoryName"
+              [ngClass]="{ 'ng-dirty': submitted && f.categoryName.errors }" />
+            <div *ngIf="(f.categoryName.invalid) && (submitted && f.categoryName.errors)" class="p-error">
+              <div *ngIf="f.categoryName.errors && !categoryName">{{validation.MES_2}}</div>
+              <div *ngIf="f.categoryName.errors && categoryName">{{validation.MES_11}}</div>
+            </div>
+          </th>
+        </tr>
+
+      </ng-template>
+    </p-table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary"
+      routerLink="/ecoland/web_categ2-list"></button>
+    <ng container *ngIf="this.id === null || this.id === '';else other_content">
+
+      <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info"
+        (click)="createOrUpdateSmallCategory()"></button>
+    </ng>
+    <ng-template #other_content>
+      <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info"
+        (click)="createOrUpdateSmallCategory()"></button>
+    </ng-template>
+
+  </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

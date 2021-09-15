@@ -1,0 +1,76 @@
+<title-component [title]="screenTitle"></title-component>
+<div appContainer>
+  <form [formGroup]="formData">
+    <table class="custom-table-form">
+      <tr>
+        <th>ID</th>
+        <th>
+          <span *ngIf="id" style="margin-left: 13px;">{{ id }}</span>
+        </th>
+      </tr>
+      <tr>
+          <td>商品ランク名</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%', 'margin-left': '13px' }" maxlength="30" required formControlName="productRankName" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.productRankName.errors),
+                  'ng-invalid': duplicateFlag
+                }" (focusout)="clearErr()" />
+              <div *ngIf="
+                  (f.productRankName.invalid && f.productRankName.dirty && f.productRankName.errors) ||
+                  (isSubmited && f.productRankName.errors)
+                " class="p-error">{{ mes.MES_2 }}
+              </div>
+              <div *ngIf="duplicateFlag" class="p-error">
+                {{mes.MES_11}}
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <td>サイズ(三辺の和)</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%', 'margin-left': '13px' }" required formControlName="size" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.size.errors) 
+                }"/>
+              <span style="margin-left: 10px;">cm(センチメートル</span>
+              <div *ngIf="(f.size.invalid && f.size.dirty) || (isSubmited && f.size.errors)" class="p-error">
+                {{ mes.MES_2 }}
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <td>重量</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%', 'margin-left': '13px' }" required formControlName="weight" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.weight.errors)
+                }"/>
+              <span style="margin-left: 10px;">kg(キログラム）</span>
+              <div *ngIf="
+                  (f.weight.invalid && f.weight.dirty) ||
+                  (isSubmited && f.weight.errors)
+                " class="p-error">{{ mes.MES_2 }}
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <td>税抜き集荷料金</td>
+          <td>
+              <span style="margin-right: 5px;">¥</span>
+              <input type="text" pInputText [style]="{ width: '50%' }" required formControlName="priceNotax" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.priceNotax.errors)
+                }"/>
+              <div *ngIf="
+                  (f.priceNotax.invalid && f.priceNotax.dirty) ||
+                  (isSubmited && f.priceNotax.errors)
+                " class="p-error">{{ mes.MES_2 }}
+              </div>
+          </td>
+      </tr>
+    </table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary" routerLink="/ecoland/rank-list"></button>
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info" (click)="onSubmit()"></button>
+  </app-horizoltal-view>
+  </div>
+  <p-toast position="top-right"></p-toast>

@@ -1,0 +1,9 @@
+<div class="topnav" id="myTopnav">
+    <label *ngIf = "!isLoggedIn">エコランド</label>
+    <p *ngIf = "isLoggedIn">
+        <span>{{inforUserLogin.partnersName}}</span>
+        <span>{{inforUserLogin.branchShortName}}</span>
+        <span>{{inforUserLogin.accountName}}</span>
+        <i class="pi pi-sign-out" (click)="logout()">ログアウト</i>
+    </p>
+</div>

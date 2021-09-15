@@ -1,0 +1,47 @@
+<title-component [title]="screenTitle"></title-component>
+<div appContainer>
+  <form [formGroup]="formData">
+    <table class="custom-table-form">
+      <tr>
+        <th>ID</th>
+        <th>
+          <span *ngIf="id" style="margin-left: 13px;">{{ id }}</span>
+        </th>
+      </tr>
+      <tr>
+          <td>OEMタイプ</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%'}" maxlength="20" required formControlName="oemName" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.oemName.errors),
+                  'ng-invalid': duplicateFlag
+                }" (focusout)="clearErr()"/>
+              <div *ngIf="
+                  (f.oemName.invalid && f.oemName.dirty && f.oemName.errors) ||
+                  (isSubmited && f.oemName.errors)
+                " class="p-error">{{ mes.MES_2 }}
+              </div>
+              <div *ngIf="duplicateFlag" class="p-error">
+                {{mes.MES_11}}
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <td>順序</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%'}" required formControlName="sortNo" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.sortNo.errors) 
+                }"/>
+              <div *ngIf="(f.sortNo.invalid && f.sortNo.dirty) || (isSubmited && f.sortNo.errors)" class="p-error">
+                {{ mes.MES_2 }}
+              </div>
+          </td>
+      </tr>
+    </table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary" routerLink="/ecoland/oem-type-list"></button>
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info" (click)="onSubmit()"></button>
+  </app-horizoltal-view>
+  </div>
+  <p-toast position="top-right"></p-toast>

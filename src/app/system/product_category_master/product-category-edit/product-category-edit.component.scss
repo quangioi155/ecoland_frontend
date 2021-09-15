@@ -1,0 +1,16 @@
+:host ::ng-deep .p-dropdown,  .p-inputtext{
+    margin: 0px !important;
+    width: 30% !important;
+}
+:host ::ng-deep .p-autocomplete {
+    width: 30% !important;
+}
+:host ::ng-deep .p-autocomplete-input {
+    width: 100% !important;
+}
+:host ::ng-deep .margin-radio {
+    margin-right: 20px ;
+}
+:host ::ng-deep .p-radiobutton-icon {
+    transform: translateZ(0) scale(0.8,0.8) !important;
+}

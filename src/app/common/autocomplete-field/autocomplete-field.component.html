@@ -1,0 +1,15 @@
+<div class="field-view" [formGroup]="form">
+    <label>{{ label }}</label>
+    <p-autoComplete
+      styleClass="custom-dp"
+      [formControlName]="formName"
+      [showEmptyMessage]="true"
+      [suggestions]="filteredProductCategories"
+      (completeMethod)="filterProductCategories($event)"
+      [virtualScroll]="true"
+      [forceSelection]="true"
+      [emptyMessage]="'データなし'"
+      [autofocus]="true"
+      field="name"
+    ></p-autoComplete>
+  </div>

@@ -1,0 +1,66 @@
+<title-component [title]="titleUserGroup"></title-component>
+<div appContainer>
+    <form [formGroup]="userGroupForm">
+        <p-table styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 15%">ID</th>
+                    <th>{{id}}</th>
+                </tr>
+                <tr>
+                    <th style="background-color: white">{{accountNameLabel}}</th>
+                    <th style="background-color: white">
+                        <input type="text" pInputText [style]="{ width: '30%' }" maxlength="30"
+                            formControlName="groupName" [ngClass]="{ 'ng-dirty': submitted && f.groupName.errors }" />
+                        <div *ngIf="(f.groupName.invalid && f.groupName.dirty) || (submitted && f.groupName.errors)"
+                            class="p-error">
+                            <div *ngIf="f.groupName.errors">{{validation.MES_2}}</div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>{{labelRole}}</th>
+                    <th>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css"
+                            [label]="contact_customer_flag" id="contactcustomer"
+                            [ngModelCheck]="valueContactCustomerFlag" [value]="valueContactCustomerFlag"
+                            formName="contactCustomerFlag">
+                        </app-checkbox-field>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css" [label]="driver_label"
+                            id="driver" [ngModelCheck]="valueDriverFlag" [value]="valueDriverFlag"
+                            formName="driverFlag">
+                        </app-checkbox-field>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css"
+                            [label]="vehicleDispatch_label" id="dispathcVerhicle"
+                            [ngModelCheck]="valueDispathcVehicleFlag" [value]="valueDispathcVehicleFlag"
+                            formName="vehicleDispatchFlag">
+                        </app-checkbox-field>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css" [label]="zec_label"
+                            id="Zec" [ngModelCheck]="valueZecFlag" [value]="valueZecFlag" formName="zecFlag">
+                        </app-checkbox-field>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css"
+                            [label]="manager_label" id="manager" [ngModelCheck]="valueManagerFlag"
+                            [value]="valueManagerFlag" formName="manageFlag">
+                        </app-checkbox-field>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css"
+                            [label]="ware_house_label" id="valueWareHouseFlag" [ngModelCheck]="valueWareHouseFlag"
+                            [value]="valueWareHouseFlag" formName="warehouseFlag">
+                        </app-checkbox-field>
+                        <app-checkbox-field [form]="userGroupForm" class="check-box-customer-css" [label]="systemLabel"
+                            id="valueSystemFlag" [ngModelCheck]="valueSystemFlag" [value]="valueSystemFlag"
+                            formName="systemFlag">
+                        </app-checkbox-field>
+                    </th>
+                </tr>
+            </ng-template>
+        </p-table>
+    </form>
+    <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+        <div class="space"></div>
+        <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary"
+            routerLink="/ecoland/authority-list"></button>
+        <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info"
+            (click)="editOrCreateUserGroups()"></button>
+    </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

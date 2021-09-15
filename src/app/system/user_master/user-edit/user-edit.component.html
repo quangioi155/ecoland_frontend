@@ -1,0 +1,117 @@
+<title-component [title]="userMasterTitle"></title-component>
+<div appContainer>
+  <form [formGroup]="userForm">
+    <p-table styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 15%">ID</th>
+          <th>{{id}}</th>
+        </tr>
+        <tr>
+          <th style="background-color: white">ログインID</th>
+          <th style="background-color: white">
+            <input type="text" pInputText [style]="{ width: '30%' }" maxlength="20" formControlName="loginId"
+              [ngClass]="{ 'ng-dirty': submitted && f.loginId.errors }" />
+            <div *ngIf="(submitted && f.loginId.invalid && f.loginId.dirty) || (submitted && f.loginId.errors) "
+              class="p-error">
+              <div *ngIf="f.loginId.errors || minlength">{{validation.MES_2}}</div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th>パスワード</th>
+          <th>
+            <input type="text" pInputText [style]="{ width: '30%' }" maxlength="20" formControlName="loginPassword"
+              [ngClass]="{ 'ng-dirty': submitted && f.loginPassword.errors}" />
+            <div
+              *ngIf="(submitted && f.loginPassword.invalid && f.loginPassword.dirty) || (submitted && f.loginPassword.errors) || (f.loginPassword.errors && f.loginPassword.errors.minlength)"
+              class="p-error">
+              <div *ngIf="f.loginPassword.errors">{{validation.MES_2}}</div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th style="background-color: white">社員コード</th>
+          <th style="background-color: white">
+            <input type="text" pInputText [style]="{ width: '30%' }" maxlength="20" formControlName="employeeCd" />
+          </th>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <th>
+            <input type="text" pInputText [style]="{ width: '30%' }" minlength="4" maxlength="20"
+              formControlName="accountName" [ngClass]="{ 'ng-dirty': submitted && f.accountName.errors }" />
+            <div
+              *ngIf="(submitted && f.accountName.invalid && f.accountName.dirty) || (submitted && f.accountName.errors)"
+              class="p-error">
+              <div *ngIf="f.accountName.errors">{{validation.MES_2}}</div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th style="background-color: white">カナ</th>
+          <th style="background-color: white">
+            <input type="text" pInputText [style]="{ width: '30%' }" maxlength="30" formControlName="accountNameKana" />
+          </th>
+        </tr>
+        <tr>
+          <th>権限グループ</th>
+          <th>
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="dropdownlistUserGroup"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="userGroupId" [ngClass]="{ 'ng-dirty': submitted && f.userGroupId.errors }">
+            </p-dropdown>
+            <div
+              *ngIf="(submitted && f.userGroupId.invalid && f.userGroupId.dirty) || (submitted && f.userGroupId.errors)"
+              class="p-error">
+              <div *ngIf="f.userGroupId.errors">{{validation.MES_9}}</div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+          <th style="background-color: white">所属企業</th>
+          <th style="background-color: white">
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="dropdownlistPartners"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="partnerId" [ngClass]="{ 'ng-dirty': submitted && f.partnerId.errors }"
+              (onChange)="onChange($event.value,'web')"></p-dropdown>
+            <div *ngIf="(submitted && f.partnerId.invalid && f.partnerId.dirty) || (submitted && f.partnerId.errors)"
+              class="p-error">
+              <div *ngIf="f.partnerId.errors">{{validation.MES_9}}</div>
+            </div>
+          </th>
+
+        </tr>
+        <tr>
+          <th>所属拠点</th>
+          <th>
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="dropdownlistBranches"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="branchId" [ngClass]="{ 'ng-dirty': submitted && f.branchId.errors }"></p-dropdown>
+            <div *ngIf="(submitted && f.branchId.invalid && f.branchId.dirty) || (submitted && f.branchId.errors)"
+              class="p-error">
+              <div *ngIf="f.branchId.errors">{{validation.MES_9}}</div>
+            </div>
+          </th>
+
+        </tr>
+        <tr>
+          <th style="background-color: white">メモ</th>
+          <th style="background-color: white">
+            <input type="text" pInputText [style]="{ width: '30%' }" formControlName="description" />
+          </th>
+        </tr>
+      </ng-template>
+    </p-table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary"
+      routerLink="/ecoland/user-list"></button>
+
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info"
+      (click)="updateOrCreateUser()"></button>
+  </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

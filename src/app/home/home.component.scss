@@ -1,0 +1,138 @@
+
+.menu-bar {
+    background-color:#EEE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+    
+.menu-bar ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    // justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.full-role {
+    justify-content: center;
+}
+
+.less-role {
+    justify-content: flex-start;
+}
+    
+.menu-bar ul li {
+    cursor: pointer;
+    padding: 5px 30px;
+    position: relative;
+    border-right: solid 1px #D6D6D6;
+    flex-basis: 14.2%;
+}
+
+.menu-bar ul li:last-child {
+    border-right: none;
+}
+    
+.menu-bar ul li a {
+    font-size: 16px;
+    color: var(--color-white);
+    text-decoration: none;
+    transition: all 0.3s;
+    display: block;
+}
+    
+.menu-bar ul li a:hover {
+    color: #E63E97;
+}
+
+.dropdown-menu {
+    display: none;
+    width: 100%;
+    border: 1px solid #D6D6D6;
+    overflow: auto;
+    z-index: 9;
+}
+    
+.menu-bar ul li:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+    left: 0;
+    background-color: whitesmoke;
+}
+    
+.menu-bar ul li:hover .dropdown-menu ul {
+    display: block;
+}
+
+
+.menu-bar ul li:hover .dropdown-menu ul li {
+    width: 100%;
+    border-top: 1px solid #D6D6D6;
+}
+
+.dropdown-menu ul li {
+    border-right: unset;
+} 
+
+.dropdown-menu ul li:hover  {
+    display: block;
+    top: 0;
+    background-color: white;
+}
+
+.dropdown-menu ul li:first-child  {
+    border-top: 2px solid #E63E97 !important;
+}
+
+.menu-bar-right li {
+    padding: 10px 10px !important;
+}
+.menu-bar-right li:hover {
+    color: aliceblue;
+}
+
+.block_header_search {
+    display: flex;
+    float: right;
+    padding-top: 10px;
+}
+.p-button.p-button-sm {
+    font-size: 0.6rem;
+}
+.p-inputtext.p-inputtext-sm {
+    font-size: 0.6rem;
+}
+.block_first input {
+    margin: 0px 10px 0px 10px;
+    width: 160px;
+}
+.block_second input {
+    margin: 0px 10px 0px 10px;
+    width: 160px;
+}
+
+/* Màng hình laptop hoặc desktop lớn*/
+@media (min-width: 1200px) {
+}
+
+/* Màng hình máy tính bảng lớn hoặc máy tính màng hình trung bình */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Màng hình máy tính bảng nhỏ hoặc máy tính màng hình nhỏ */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Màng hình máy tính bảng rất nhỏ hoặc điện thoại di động */
+@media (max-width: 767px) {
+}
+
+/* Điện thoại di động hoặc màng hình cực nhỏ */
+@media (max-width: 480px) {
+}

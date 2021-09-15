@@ -1,0 +1,89 @@
+<title-component [title]="titleBranch"></title-component>
+<div appContainer>
+    <div>
+        <form [formGroup]="searchBranchForm" class="form-search">
+            <app-horizoltal-view>
+                <app-textbox-field [label]="branchName" [form]="searchBranchForm" formName="branchName">
+                </app-textbox-field>
+                <app-dropdown-field [data]="dropdownlistPartners" [label]="partnerLabel" [form]="searchBranchForm"
+                    formName="partnerId" [placeholder]="placeholderSelect" optionValue="value" optionLabel="name">
+                </app-dropdown-field>
+                <button pButton [label]="searchLabel" class="p-button-secondary search-btn" icon="pi pi-search"
+                    (click)="onSearch()"></button>
+                <div class="space"></div>
+                <button pButton [label]="registLabel" (click)="registerBranches()" class="p-button-secondary regist-btn"
+                    icon="pi pi-plus-circle" style="margin: 0px;"></button>
+            </app-horizoltal-view>
+        </form>
+    </div>
+    <div style="margin-top: 10px;">
+        <app-horizoltal-view>
+            <app-report-page class="report-page" [page]="curentPage"
+                [pageSize]="pageSize" [totalRecord]="totalRecord"></app-report-page>
+            <div class="space"></div>
+            <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" pageLinkSize="10"
+                (onPageChange)="pageClick($event)" #paginator>
+            </p-paginator>
+        </app-horizoltal-view>
+    </div>
+</div>
+<div appContainer>
+    <p-table [columns]="columns" [value]="branchesResponse" [scrollable]="true" scrollHeight="600px"
+        selectionMode="single" [resizableColumns]="true" responsiveLayout="scroll"
+        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm">;
+        <ng-template pTemplate="colgroup">
+            <colgroup>
+                <col style="width:3%">
+                <col style="width:9%">
+                <col style="width:9%">
+                <col style="width:8%">
+                <col style="width:6%">
+                <col style="width:15%">
+                <col style="width:7%">
+                <col style="width:7%">
+                <col style="width:8%">
+                <col style="width:8%">
+                <col style="width:8%">
+                <col style="width:8%">
+                <col style="width:4%">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" style="text-align: center;">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr [pSelectableRow]="data">
+                <td style=" color: rgb(89, 130, 241);" class="click-row" (click)="edit(data.id)">{{data.id}}
+                </td>
+                <td>{{data.partnerName}}</td>
+                <td>{{data.branchName}}</td>
+                <td>{{data.branchShortName}}</td>
+                <td>{{data.postalCode}}</td>
+                <td>{{data.address}}</td>
+                <td style="text-align: center;">{{data.inputCorpSite}}</td>
+                <td style="text-align: center;">{{data.delivCorpSite}}</td>
+                <td style="text-align: center;">{{data.tel}}</td>
+                <td style="text-align: center;">{{data.fax}}</td>
+                <td style="text-align: center;">{{data.startDate | date: 'yyyy/MM/dd'}}</td>
+                <td style="text-align: center;">{{data.endDate | date: 'yyyy/MM/dd'}}</td>
+                <td style="text-align: center;">
+                    <button pButton pRipple type="button" icon="pi pi-times" (click)="confirm('top', data.id)"
+                        class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog #cd [style]="{width: '30vw'}" key="positionDialog" [position]="position"
+    rejectButtonStyleClass="p-button-outlined">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton [label]="confirmYes" (click)="cd.accept()" [style]="{width: '80px'}"></button>
+        <button type="button" class="cancel-button" pButton [label]="confirmNo" (click)="cd.reject()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast position="top-right"></p-toast>

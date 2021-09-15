@@ -1,0 +1,99 @@
+<title-component [title]="titleProductCategory"></title-component>
+<div appContainer>
+    <div>
+        <form [formGroup]="searchProductCategoryForm">
+            <app-horizoltal-view>
+                <app-textbox-field [label]="categoryNameLabel" [form]="searchProductCategoryForm"
+                    formName="categoryName">
+                </app-textbox-field>
+                <app-dropdown-field [data]="dropdownListProductRanks" [label]="productRankLabel"
+                    [form]="searchProductCategoryForm" formName="productRankId" [placeholder]="placeholderSelect"
+                    optionValue="value" optionLabel="name">
+                </app-dropdown-field>
+                <label>{{recycledFurnitureLabel}}</label>
+                <div class="block-search">
+                    <p-radioButton class="margin-radio" name="recoverableFlag" [label]="recycledFurnitureLabel"
+                        value="true" formControlName="recoverableFlag"></p-radioButton>
+                    <p-radioButton class="margin-radio css-left" name="recoverableFlag"
+                        [label]="notRecycledFurnitureLabel" value="false" formControlName="recoverableFlag">
+                    </p-radioButton>
+                </div>
+                <label>WEB{{webShowLabel}}</label>
+                <div class="block-search">
+                    <p-radioButton class="margin-radio" name="webDispFlag" [label]="webShowLabel" value="false"
+                        formControlName="webDispFlag" value="true">
+                    </p-radioButton>
+                    <p-radioButton class="margin-radio css-left" name="webDispFlag" [label]="webDisable" value="false"
+                        formControlName="webDispFlag" value="false">
+                    </p-radioButton>
+                </div>
+                <button pButton [label]="searchLabel" class="p-button-secondary search-btn" icon="pi pi-search"
+                    (click)="onSearch()"></button>
+                <div class="space"></div>
+                <button pButton [label]="registLabel" (click)="registerProductCategory()"
+                    class="p-button-secondary del-btn" icon="pi pi-plus-circle" style="margin: 0px;"></button>
+            </app-horizoltal-view>
+        </form>
+    </div>
+    <div class="paginator-top">
+        <app-horizoltal-view>
+            <app-report-page class="report-page" [page]="curentPage" [pageSize]="pageSize" [totalRecord]="totalRecord">
+            </app-report-page>
+            <div class="space"></div>
+            <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" pageLinkSize="10"
+                (onPageChange)="pageClick($event)" #paginator>
+            </p-paginator>
+        </app-horizoltal-view>
+    </div>
+</div>
+<div appContainer>
+    <p-table [columns]="columns" [value]="productCategoryList" [scrollable]="true" scrollHeight="600px"
+        selectionMode="single" [resizableColumns]="true" responsiveLayout="scroll"
+        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm">;
+        <ng-template pTemplate="colgroup">
+            <colgroup>
+                <col style="width:4%">
+                <col style="width:20%">
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:20%">
+                <col style="width:4%">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" style="text-align: center;">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr [pSelectableRow]="data">
+                <td style=" color: rgb(89, 130, 241);" class="click-row" (click)="detailProductCategoryById(data.id)">
+                    {{data.id}}
+                </td>
+                <td>{{data.categoryName}}</td>
+                <td style="text-align: right;">{{Yen}} {{data.warehousingTransactionFee}}</td>
+                <td>{{data.productRankName}}</td>
+                <td>{{data.recoverabeFlag ? recycledFurnitureLabel : notRecycledFurnitureLabel}}</td>
+                <td>{{data.webDispFlag ? webShowLabel : webDisable}}</td>
+                <td>{{data.keywords}}</td>
+                <td style="text-align: center;">
+                    <button pButton pRipple type="button" icon="pi pi-times" (click)="confirm('top', data.id)"
+                        class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog #cd [style]="{width: '30vw'}" key="positionDialog" [position]="position"
+    rejectButtonStyleClass="p-button-outlined">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton [label]="confirmYes" (click)="cd.accept()" [style]="{width: '80px'}"></button>
+        <button type="button" class="cancel-button" pButton [label]="confirmNo" (click)="cd.reject()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast position="top-right"></p-toast>

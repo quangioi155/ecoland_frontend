@@ -1,0 +1,107 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0px;
+  font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', Osaka,
+    'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+  font-size: small;
+}
+.marginText {
+  margin-top: 5px;
+}
+.required-asterisk {
+  color: red;
+  font-weight: bold;
+  margin-left: 3px;
+  font-size: 1.2em;
+}
+
+.title-screen {
+  padding: 10px 0px !important;
+}
+.p-paginator {
+  justify-content: flex-end !important;
+  padding: 0.5rem 0rem !important;
+}
+//dia log
+.p-dialog .p-dialog-header {
+  border-bottom: 1px solid #e9ecef !important;
+}
+.p-dialog .p-dialog-content {
+  background: #ffffff !important;
+  color: #212529 !important;
+  padding: 1rem !important;
+}
+.p-dialog .p-dialog-footer {
+  border-top: 1px solid #e9ecef !important;
+  padding: 1rem !important;
+}
+//ket thuc dialog
+// phan header
+.block_header {
+  overflow: hidden;
+  zoom: 1;
+  margin-top: -5px;
+  padding: 0 10px 6px;
+  text-align: right;
+}
+.block_header a {
+  background: #009fa4 url('/assets/img/title.gif') no-repeat;
+  display: block;
+  overflow: hidden;
+  width: 302px;
+  height: 0;
+  margin-bottom: 4px;
+  padding-top: 24px;
+  line-height: 200%;
+  float: left;
+}
+// ket thuc header
+.click-row:hover {
+  text-decoration: underline;
+  color: tomato;
+}
+.p-datatable-tbody tr td:first-child {
+  text-align: center !important;
+}
+.cancel-button {
+  background: white !important;
+  color: blue !important;
+  border: 1px #e0e0e0 solid !important;
+}
+.p-error {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+.span-note {
+    margin-left: 10px;
+}
+.paginator-top {
+    margin-top: 10px;
+}
+.report-page {
+    margin-left: 13px; 
+    font-size: 16px; 
+    font-weight: 200;
+}
+.number-right {
+    text-align: right;
+}
+.p-divider.p-divider-horizontal {
+    padding: 0 0.7rem !important;
+}
+.p-divider.p-divider-horizontal .p-divider-content {
+    padding: 0 0.4rem !important;
+}
+.report-page {
+    margin-left: 2px;
+    font-size: 16px; 
+    font-weight: 200;
+}
+.form-search {
+    margin-left: 2px;
+}
+.p-datatable-scrollable-header-box {
+    padding-right: 1.11% !important;
+}
+

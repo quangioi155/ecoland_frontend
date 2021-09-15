@@ -1,0 +1,222 @@
+<title-component [title]="screenTitle"></title-component>
+<div appContainer>
+  <form [formGroup]="formData">
+    <table class="custom-table-form">
+      <tr>
+        <th>ID</th>
+        <th>
+          <span *ngIf="id" style="margin-left: 13px;">{{ id }}</span>
+        </th>
+      </tr>
+      <tr>
+          <td>提携先企業名</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%'}" maxlength="60" required formControlName="introductionName" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.introductionName.errors),
+                  'ng-invalid': duplicateFlag
+                }" (focusout)="clearErr()"/>
+              <div *ngIf="
+                  (f.introductionName.invalid && f.introductionName.dirty && f.introductionName.errors) ||
+                  (isSubmited && f.introductionName.errors)
+                " class="p-error">{{ mes.MES_2 }}
+              </div>
+              <div *ngIf="duplicateFlag" class="p-error">
+                {{mes.MES_11}}
+              </div>
+          </td>
+      </tr>
+      <tr>
+          <td>提携企業略称</td>
+          <td>
+              <input type="text" pInputText [style]="{ width: '50%'}" maxlength="30" required formControlName="introductionShortName" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.introductionShortName.errors) 
+                }"/>
+              <div *ngIf="(f.introductionShortName.invalid && f.introductionShortName.dirty) || (isSubmited && f.introductionShortName.errors)" class="p-error">
+                {{ mes.MES_2 }}
+              </div>
+          </td>
+      </tr>
+      <tr>
+        <td>提携企業略称カナ</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '50%'}" maxlength="60" formControlName="introductionNameKana" [ngClass]="{
+                'ng-dirty': (isSubmited && f.introductionNameKana.errors) 
+              }"/>
+            <div *ngIf="(f.introductionNameKana.invalid && f.introductionNameKana.dirty) || (isSubmited && f.introductionNameKana.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>郵便番号</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '30%', 'margin-right': '15px' }" maxlength="7"  formControlName="postalCode" [ngClass]="{
+                'ng-dirty': (isSubmited && f.postalCode.errors) 
+              }"/>
+            <span>ハイフン（－）なしで入力してください。</span>
+            <div *ngIf="(f.postalCode.invalid && f.postalCode.dirty) || (isSubmited && f.postalCode.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>住所1</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '50%'}" maxlength="60" formControlName="address1" [ngClass]="{
+                'ng-dirty': (isSubmited && f.address1.errors) 
+              }"/>
+            <div *ngIf="(f.address1.invalid && f.address1.dirty) || (isSubmited && f.address1.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>住所2</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '50%'}" maxlength="60" formControlName="address2" [ngClass]="{
+                'ng-dirty': (isSubmited && f.address2.errors) 
+              }"/>
+            <div *ngIf="(f.address2.invalid && f.address2.dirty) || (isSubmited && f.address2.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>住所3</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '50%'}" maxlength="60" formControlName="address3" [ngClass]="{
+                'ng-dirty': (isSubmited && f.address2.errors) 
+              }"/>
+            <div *ngIf="(f.address3.invalid && f.address3.dirty) || (isSubmited && f.address3.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>電話番号</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '30%', 'margin-right': '15px' }" maxlength="13" formControlName="tel" [ngClass]="{ 'ng-dirty': isSubmited && f.tel.errors }" />
+          <span>ハイフン（－）を含めて入力してください。</span>
+          <div *ngIf="
+              (f.tel.invalid && f.tel.dirty) || (isSubmited && f.tel.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <td>FAX番号</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '30%', 'margin-right': '15px' }" maxlength="13" formControlName="fax" [ngClass]="{ 'ng-dirty': isSubmited && f.fax.errors }" />
+          <span>ハイフン（－）を含めて入力してください。</span>
+          <div *ngIf="
+              (f.fax.invalid && f.fax.dirty) || (isSubmited && f.fax.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <td>支払発生契機</td>
+        <td>
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="payTimingData"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="payTiming" [ngClass]="{ 'ng-dirty': isSubmited && f.payTiming.errors }">
+            </p-dropdown>
+            <div *ngIf="
+              (f.payTiming.invalid && f.payTiming.dirty) || (isSubmited && f.payTiming.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <td>支払単位</td>
+        <td>
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="payUnitData"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="payUnit" [ngClass]="{ 'ng-dirty': isSubmited && f.payUnit.errors }">
+            </p-dropdown>
+            <div *ngIf="
+              (f.payUnit.invalid && f.payUnit.dirty) || (isSubmited && f.payUnit.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <td>支払金額</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '30%'}" formControlName="payAmount" [ngClass]="{
+                'ng-dirty': (isSubmited && f.payAmount.errors) 
+              }"/>
+            <div *ngIf="(f.payAmount.invalid && f.payAmount.dirty) || (isSubmited && f.payAmount.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>支払率</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '30%'}" formControlName="payPercent" [ngClass]="{
+                'ng-dirty': (isSubmited && f.payPercent.errors) 
+              }"/>
+            <div *ngIf="(f.payPercent.invalid && f.payPercent.dirty) || (isSubmited && f.payPercent.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>割引単位</td>
+        <td>
+            <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="discountUnitData"
+              optionValue="value" optionLabel="name" [showClear]="true" [style]="{ width: '30%' }"
+              formControlName="discountUnit" [ngClass]="{ 'ng-dirty': isSubmited && f.discountUnit.errors }">
+            </p-dropdown>
+            <div *ngIf="(f.discountUnit.invalid && f.discountUnit.dirty) || (isSubmited && f.discountUnit.errors)" class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+    </tr>
+    <tr>
+        <td>割引金額</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '30%'}" formControlName="discount" [ngClass]="{
+                'ng-dirty': (isSubmited && f.discount.errors) 
+              }"/>
+            <div *ngIf="(f.discount.invalid && f.discount.dirty) || (isSubmited && f.discount.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>割引率</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '30%'}" formControlName="discountPercent" [ngClass]="{
+                'ng-dirty': (isSubmited && f.discountPercent.errors) 
+              }"/>
+            <div *ngIf="(f.discountPercent.invalid && f.discountPercent.dirty) || (isSubmited && f.discountPercent.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>表示順序</td>
+        <td>
+            <input type="text" pInputText [style]="{ width: '30%'}" formControlName="sortNo" [ngClass]="{
+                'ng-dirty': (isSubmited && f.sortNo.errors) 
+              }"/>
+            <div *ngIf="(f.sortNo.invalid && f.sortNo.dirty) || (isSubmited && f.sortNo.errors)" class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+        </td>
+    </tr>
+    </table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary" routerLink="/ecoland/introduction-list"></button>
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info" (click)="onSubmit()"></button>
+  </app-horizoltal-view>
+  </div>
+  <p-toast position="top-right"></p-toast>

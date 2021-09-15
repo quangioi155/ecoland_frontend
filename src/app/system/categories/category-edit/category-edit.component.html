@@ -1,0 +1,37 @@
+<title-component [title]="WEBLargeCategoryLabel"></title-component>
+<div appContainer>
+  <form [formGroup]="formData">
+    <table class="custom-table-form">
+      <tr>
+        <th>ID</th>
+        <th>
+          <span *ngIf="id">{{ id }}</span>
+        </th>
+      </tr>
+      <tr>
+        <td style="text-align: left">カテゴリ名</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" maxlength="20" required
+            formControlName="categoryName" [ngClass]="{
+              'ng-dirty': (isSubmited && f.categoryName.errors) || err.length > 0,
+              'ng-invalid': err.length > 0
+            }" (focusout)="clearErr($event)" #ipcategory />
+          <div *ngIf="
+              (f.categoryName.invalid && f.categoryName.dirty) ||
+              (isSubmited && f.categoryName.errors) || err.length > 0
+            " class="p-error">
+            <div *ngIf="f.categoryName.errors">{{ mes.MES_2 }}</div>
+            <div *ngIf="err.length">{{err[0]}}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary"
+      routerLink="/ecoland/web_categ1-list"></button>
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info" (click)="onSubmit()"></button>
+  </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

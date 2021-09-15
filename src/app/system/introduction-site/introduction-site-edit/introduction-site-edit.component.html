@@ -1,0 +1,76 @@
+<title-component [title]="screenTitle"></title-component>
+<div appContainer>
+  <form [formGroup]="formData">
+    <table class="custom-table-form">
+      <tr>
+        <th>ID</th>
+        <th>
+          <span *ngIf="id" style="margin-left: 13px;">{{ id }}</span>
+        </th>
+      </tr>
+      <tr>
+        <td>提携企業</td>
+        <td>
+          <p-dropdown styleClass="custom-dp" [placeholder]="placeholder" [options]="pdIntroductionData" optionValue="value" optionLabel="name"
+          [showClear]="true" [style]="{ width: '30%' }" formControlName="introductionId" [ngClass]="{ 'ng-dirty': isSubmited && f.introductionId.errors }">
+          </p-dropdown>
+          <div *ngIf="
+              (f.introductionId.invalid && f.introductionId.dirty) || (isSubmited && f.introductionId.errors)
+            " class="p-error">
+            {{ mes.MES_9 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>提携企業拠点名</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%'}" required formControlName="introductionSiteName" maxlength="30" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.introductionSiteName.errors) 
+                }" />
+          <div *ngIf="(f.introductionSiteName.invalid && f.introductionSiteName.dirty) || (isSubmited && f.introductionSiteName.errors)" class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>提携企業拠点カナ</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%'}" formControlName="introductionSiteNameKana" maxlength="30" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.introductionSiteNameKana.errors) 
+                }" />
+          <div *ngIf="(f.introductionSiteNameKana.invalid && f.introductionSiteNameKana.dirty) || (isSubmited && f.introductionSiteNameKana.errors)" class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>提携企業拠点責任者</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%'}" formControlName="introductionSiteManager" maxlength="60" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.introductionSiteManager.errors) 
+                }" />
+          <div *ngIf="(f.introductionSiteManager.invalid && f.introductionSiteManager.dirty) || (isSubmited && f.introductionSiteManager.errors)" class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>表示順序</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%'}" formControlName="sortNo" [ngClass]="{
+                  'ng-dirty': (isSubmited && f.sortNo.errors) 
+                }" />
+          <div *ngIf="(f.sortNo.invalid && f.sortNo.dirty) || (isSubmited && f.sortNo.errors)" class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary" routerLink="/ecoland/introduction-site-list"></button>
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info" (click)="onSubmit()"></button>
+  </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

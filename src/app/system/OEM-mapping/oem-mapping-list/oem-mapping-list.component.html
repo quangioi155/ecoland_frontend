@@ -1,0 +1,158 @@
+<!-- <app-home> -->
+<title-component [title]="OEMMappingTitle"></title-component>
+<div class="search-field">
+    <div>
+    <form [formGroup]="searchForm" style="margin-left: 15px">
+        <app-horizoltal-view>
+        <app-autocomplete-field
+            [data]="dropdownlistProductCategories"
+            [label]="ProductcategorieLabel"
+            [form]="searchForm"
+            formName="productCategoryId"
+        >
+        </app-autocomplete-field>
+
+        <app-dropdown-field
+            [data]="dropdownlistOEMTypes"
+            [label]="OEMTypeLabel"
+            [form]="searchForm"
+            formName="oemTypeId"
+            [placeholder]="placeholderSelect"
+            optionValue="value"
+            optionLabel="name"
+        >
+        </app-dropdown-field>
+
+        <app-textbox-field
+            [label]="OEMCategoryLabel"
+            [form]="searchForm"
+            formName="anotherCategoryName"
+        >
+        </app-textbox-field>
+
+        <app-textbox-field
+            [label]="OEMCategoryCDLabel"
+            [form]="searchForm"
+            formName="anotherPickupFee"
+        >
+        </app-textbox-field>
+
+        <button
+            pButton
+            [label]="searchLabel"
+            (click)="onSearch()"
+            class="p-button-secondary search-btn"
+            icon="pi pi-search"
+        ></button>
+
+        <div class="space"></div>
+
+        <button
+            pButton
+            [label]="registLabel"
+            routerLink="/ecoland/OEM_mapping-edit"
+            class="p-button-secondary del-btn"
+            icon="pi pi-plus-circle"
+            style="margin: 0px"
+        ></button>
+        </app-horizoltal-view>
+    </form>
+    </div>
+    <div style="margin-top: 10px">
+    <app-horizoltal-view>
+        <app-report-page
+        style="margin-left: 13px; font-size: 16px; font-weight: 200"
+        [page]="curentPage"
+        [pageSize]="pageSize"
+        [totalRecord]="totalRecord"
+        ></app-report-page>
+        <div class="space"></div>
+        <p-paginator
+        [rows]="pageSize"
+        [totalRecords]="totalRecord"
+        [pageLinkSize]="pageLinkSize"
+        (onPageChange)="pageClick($event)"
+        #paginator
+        >
+        </p-paginator>
+    </app-horizoltal-view>
+    </div>
+</div>
+<div class="search-field">
+    <p-table
+    [columns]="columns"
+    [value]="dataResponse"
+    styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+    selectionMode="single"
+    [resizableColumns]="true"
+    [scrollable]="true"
+    scrollHeight="600px"
+    >
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+        <th
+            *ngFor="let col of columns"
+            [style.width]="col.width"
+            style="text-align: center"
+        >
+            {{ col.header }}
+        </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr [pSelectableRow]="data">
+        <td
+            style="width: 4%; color: rgb(89, 130, 241)"
+            (click)="gotoEdit(data.id)"
+            class="click-row"
+        >
+            {{ data.id }}
+        </td>
+        <td style="width: 20%">{{ data.categoryName }}</td>
+        <td style="width: 10%;text-align: center;">{{ data.oemName }}</td>
+        <td style="width: 20%">{{ data.anotherCategoryName }}</td>
+        <td style="width: 10%;text-align: right;">{{ data.anotherPickupFee |currency:"JPY":"symbol"}}</td>
+        <td style="width: 9%;text-align: center;">{{ data.oemCategoriesCD }}</td>
+        <td style="width: 20%">{{ data.keywords }}</td>
+        <td style="text-align: center; width: 4%">
+            <button
+            *ngIf="currentOEMCategory !== data.OEMCategory"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-times"
+            (click)="confirm('top', data.id)"
+            class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+        </td>
+        </tr>
+    </ng-template>
+    </p-table>
+</div>
+
+<!-- </app-home> -->
+<p-confirmDialog
+    #cd
+    [style]="{ width: '30vw' }"
+    key="positionDialog"
+    [position]="position"
+    rejectButtonStyleClass="p-button-outlined"
+>
+    <ng-template pTemplate="footer">
+    <button
+        type="button"
+        pButton
+        [label]="confirmYes"
+        (click)="cd.accept()"
+        [style]="{ width: '80px' }"
+    ></button>
+    <button
+        type="button"
+        class="cancel-button"
+        pButton
+        [label]="confirmNo"
+        (click)="cd.reject()"
+    ></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast position="top-right"></p-toast>

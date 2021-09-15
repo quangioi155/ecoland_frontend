@@ -1,0 +1,165 @@
+<title-component [title]="titleBranch"></title-component>
+<div appContainer>
+    <form [formGroup]="branchForm">
+        <table class="custom-table-form">
+            <!-- <ng-template pTemplate="header"> -->
+            <tr>
+                <th style="width: 15%">ID</th>
+                <th>{{id}}</th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{partnerLabel}}</th>
+                <th style="background-color: white">
+                    <p-dropdown [options]="dropdownlistPartners" optionValue="value" optionLabel="name"
+                        formControlName="partnerId" [ngClass]="{ 'ng-dirty': submitted && f.partnerId.errors }"
+                        [placeholder]="placeholderSelect">
+                    </p-dropdown>
+                    <div *ngIf="(f.partnerId.invalid && f.partnerId.dirty) || (submitted && f.partnerId.errors)"
+                        class="p-error">
+                        <div *ngIf="f.partnerId.errors">{{validation.MES_3}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{branchNameLabel}}</th>
+                <th>
+                    <input type="text" pInputText [style]="{ width: '30%' }" maxlength="30" name="branchNames"
+                        formControlName="branchName" [ngClass]="{ 'ng-dirty': submitted && f.branchName.errors }" />
+                    <div *ngIf="(f.branchName.invalid && f.branchName.dirty) || (submitted && f.branchName.errors)"
+                        class="p-error">
+                        <div *ngIf="f.branchName.errors || f.branchName.errors.maxlength">{{validation.MES_2}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{branchShortNameLabel}}</th>
+                <th style="background-color: white">
+                    <input type="text" pInputText [style]="{ width: '30%' }" maxlength="20"
+                        formControlName="branchShortName" name="branchShortName"
+                        [ngClass]="{ 'ng-dirty': submitted && f.branchShortName.errors }" />
+                    <div *ngIf="(f.branchShortName.invalid && f.branchShortName.dirty) || (submitted && f.branchShortName.errors)"
+                        class="p-error">
+                        <div *ngIf="f.branchShortName.errors || f.branchShortName.errors.maxlength">
+                            {{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{postCodeLabel}}</th>
+                <th>
+                    <input type="text" pInputText [style]="{ width: '30%' }" maxlength="7" formControlName="postalCode"
+                        name="postalCode"
+                        [ngClass]="{ 'ng-dirty': submitted && f.postalCode.errors && f.postalCode.errors.maxlength}" />
+                    <span class="span-note">ハイフン（－）なしで入力してください。</span>
+                    <div *ngIf="(f.postalCode.invalid && f.postalCode.dirty) || (submitted && f.postalCode.errors)"
+                        class="p-error">
+                        <div *ngIf="f.postalCode.errors.maxlength">{{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{addressLabel1}}</th>
+                <th style="background-color: white">
+                    <input type="text" pInputText [style]="{ width: '30%' }" maxlength="60" formControlName="address1"
+                        name="address1"
+                        [ngClass]="{ 'ng-dirty': submitted && f.address1.errors && f.address1.errors.maxlength}" />
+                    <div *ngIf="(f.address1.invalid && f.address1.dirty) || (submitted && f.address1.errors)"
+                        class="p-error">
+                        <div *ngIf="f.address1.errors.maxlength">{{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{addressLabel2}}</th>
+                <th>
+                    <input type="text" pInputText [style]="{ width: '30%' }" maxlength="60" formControlName="address2"
+                        name="address2"
+                        [ngClass]="{ 'ng-dirty': submitted && f.address2.errors && f.address2.errors.maxlength}" />
+                    <div *ngIf="(f.address2.invalid && f.address2.dirty) || (submitted && f.address2.errors)"
+                        class="p-error">
+                        <div *ngIf="f.address2.errors.maxlength">{{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{addressLabel3}}</th>
+                <th style="background-color: white">
+                    <input type="text" pInputText [style]="{ width: '30%' }" maxlength="60" formControlName="address3"
+                        name="address3"
+                        [ngClass]="{ 'ng-dirty': submitted && f.address3.errors && f.address3.errors.maxlength}" />
+                    <div *ngIf="(f.address3.invalid && f.address3.dirty) || (submitted && f.address3.errors)"
+                        class="p-error">
+                        <div *ngIf="f.address3.errors.maxlength">{{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{telLabel}}</th>
+                <th>
+                    <input type="text" pInputText [style]="{ width: '30%' }" name="tel" maxlength="13"
+                        formControlName="tel"
+                        [ngClass]="{ 'ng-dirty': submitted && f.tel.errors && f.tel.errors.maxlength}" />
+                    <span class="span-note">ハイフン（－）を含めて入力してください。</span>
+                    <div *ngIf="(f.tel.invalid && f.tel.dirty) || (submitted && f.tel.errors)" class="p-error">
+                        <div *ngIf="f.tel.errors.maxlength">{{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{faxLabel}}</th>
+                <th style="background-color: white">
+                    <input type="text" pInputText [style]="{ width: '30%' }" name="fax" maxlength="13"
+                        formControlName="fax" />
+                    <span class="span-note">ハイフン（－）を含めて入力してください。</span>
+                    <div *ngIf="submitted && f.fax.errors" class="p-error">
+                        <div *ngIf="submitted && f.fax.errors.maxlength">{{validation.MES_2}}</div>
+                    </div>
+                </th>
+            </tr>
+
+            <tr>
+                <th>{{startDateLabel}}</th>
+                <th>
+                    <app-date-common formName="startDate" [form]="branchForm"></app-date-common>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{endDateLabel}}</th>
+                <th style="background-color: white">
+                    <app-date-common formName="endDate" [form]="branchForm"></app-date-common>
+                </th>
+            </tr>
+            <tr>
+                <th>{{inputCorpSiteLabel}}</th>
+                <th>
+                    <input type="text" name="inputCorpSite" numbersOnly pInputText [style]="{ width: '30%' }"
+                        formControlName="inputCorpSite" />
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{delivCorpSiteLabel}}</th>
+                <th style="background-color: white">
+                    <input type="text" name="delivCorpSite" numbersOnly pInputText [style]="{ width: '30%' }"
+                        formControlName="delivCorpSite" />
+                </th>
+            </tr>
+            <tr>
+                <th>{{branchCodeLabel}}</th>
+                <th style="background-color: white">
+                    <input type="text" name="branhCode" maxlength="5"  pInputText [style]="{ width: '30%' }"
+                        formControlName="branhCode" />
+                </th>
+            </tr>
+            <!-- </ng-template> -->
+        </table>
+    </form>
+    <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+        <div class="space"></div>
+        <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary"
+            routerLink="/ecoland/branch-list"></button>
+        <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info"
+            (click)="registerOrEditBranch()"></button>
+    </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

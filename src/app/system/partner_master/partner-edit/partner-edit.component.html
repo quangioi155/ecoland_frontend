@@ -1,0 +1,177 @@
+<title-component [title]="companyGroupLabel"></title-component>
+<div appContainer>
+  <form [formGroup]="formData">
+    <table class="custom-table-form">
+      <tr>
+        <th>ID</th>
+        <th>
+          <span *ngIf="id">{{ id }}</span>
+        </th>
+      </tr>
+      <tr>
+        <td style="text-align: left">企業名</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" maxlength="30" required formControlName="partnerName" [ngClass]="{
+              'ng-dirty': (isSubmited && f.partnerName.errors) || err.length > 0,
+              'ng-invalid': err.length > 0
+            }" (focusout)="clearErr($event)" #ipPartner/>
+          <div *ngIf="
+              (f.partnerName.invalid && f.partnerName.dirty) ||
+              (isSubmited && f.partnerName.errors) || err.length > 0
+            " class="p-error">
+            <div *ngIf="f.partnerName.errors">{{ mes.MES_2 }}</div>
+            <div *ngIf="err.length">{{err[0]}}</div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>住所1</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" maxlength="60" formControlName="address1" />
+          <div *ngIf="
+              (f.address1.invalid && f.address1.dirty) ||
+              (isSubmited && f.address1.errors)
+            " class="p-error" [ngClass]="{
+              'ng-dirty': isSubmited && f.address1.errors
+            }">
+            <div *ngIf="
+                (f.address1.invalid && f.address1.dirty) ||
+                (isSubmited && f.address1.errors)
+              " class="p-error">
+              {{ mes.MES_2 }}
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>住所2</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" maxlength="60" formControlName="address2" [ngClass]="{
+              'ng-dirty': isSubmited && f.address2.errors
+            }" />
+          <div *ngIf="
+              (f.address2.invalid && f.address2.dirty) ||
+              (isSubmited && f.address2.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>住所3</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" maxlength="60" formControlName="address3" [ngClass]="{
+              'ng-dirty': isSubmited && f.address3.errors
+            }" />
+          <div *ngIf="
+              (f.address3.invalid && f.address3.dirty) ||
+              (isSubmited && f.address3.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>郵便番号</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '30%', 'margin-right': '15px' }" maxlength="7" formControlName="postalCode" [ngClass]="{
+              'ng-dirty': isSubmited && f.postalCode.errors
+            }" />
+          <span>ハイフン（－）なしで入力してください。</span>
+          <div *ngIf="
+              (f.postalCode.invalid && f.postalCode.dirty) ||
+              (isSubmited && f.postalCode.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '30%', 'margin-right': '15px' }" maxlength="13" formControlName="tel" [ngClass]="{ 'ng-dirty': isSubmited && f.tel.errors }" />
+          <span>ハイフン（－）を含めて入力してください。</span>
+          <div *ngIf="
+              (f.tel.invalid && f.tel.dirty) || (isSubmited && f.tel.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>FAX番号</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '30%', 'margin-right': '15px' }" maxlength="13" formControlName="fax" [ngClass]="{ 'ng-dirty': isSubmited && f.fax.errors }" />
+          <span>ハイフン（－）を含めて入力してください。</span>
+          <div *ngIf="
+              (f.fax.invalid && f.fax.dirty) || (isSubmited && f.fax.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" maxlength="60" formControlName="mailAddress" [ngClass]="{
+              'ng-dirty': isSubmited && f.mailAddress.errors
+            }" />
+          <div *ngIf="
+              (f.mailAddress.invalid && f.mailAddress.dirty) ||
+              (isSubmited && f.mailAddress.errors)
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>開始日</td>
+        <td>
+          <p-calendar [style]="{ width: '20%' }" dataType="string" icon="pi pi-calendar" dateFormat="yy/mm/dd" [showIcon]="true" formControlName="startDate" (focusout)="clearErr($event)"
+          [ngClass]="{
+              'ng-dirty': isSubmited && f.startDate.errors,
+              'ng-invalid': invalidDate
+            }"></p-calendar>
+          <div *ngIf="
+              (f.startDate.invalid && f.startDate.dirty) ||
+              (isSubmited && f.startDate.errors) || invalidDate
+            " class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>終了日</td>
+        <td>
+          <p-calendar [style]="{ width: '20%' }" dataType="string" icon="pi pi-calendar" dateFormat="yy/mm/dd" [showIcon]="true" formControlName="endDate" (focusout)="clearErr($event)"
+           [ngClass]="{
+            'ng-dirty': isSubmited,
+            'ng-invalid': invalidDate
+            }">
+          </p-calendar>
+          <div *ngIf="invalidDate" class="p-error">
+            {{ mes.MES_2 }}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>担当者</td>
+        <td>
+          <input type="text" pInputText [style]="{ width: '50%' }" formControlName="managerName" />
+        </td>
+      </tr>
+      <tr>
+        <td>メイン事業者フラグ</td>
+        <td>
+          <p-checkbox [binary]="true" label="メイン事業者フラグ" labelStyleClass="custom-cb" formControlName="mainFlag"></p-checkbox>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+    <div class="space"></div>
+    <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary" routerLink="/ecoland/partner-list"></button>
+    <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info" (click)="onSubmit()"></button>
+  </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

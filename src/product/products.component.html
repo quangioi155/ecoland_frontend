@@ -1,0 +1,58 @@
+<div>
+  </button>
+  <table id="customers" style="border-collapse: collapse;">
+    <tr>
+      <th>件数</th>
+      <th>ページング</th>
+      <th>
+        Id
+        </mat-icon>
+        <mat-icon style="cursor: pointer;" (click)="sortByCode('up')">
+          arrow_upward
+        </mat-icon>
+      </th>
+      <button mat-raised-button color="primary" (click)="addStudent()">
+        <mat-icon>add_box</mat-icon>
+        外注企業名
+      </button>
+      <th>住所</th>
+      <th>電話番号</th>
+      <th>パートナー企業</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>
+        <mat-icon
+          style="cursor: pointer;"
+          title="Nhấn vào để xóa"
+          (click)="deleteproduct(product.id)"
+        >
+          clear
+        </mat-icon>
+        &nbsp;
+        <mat-icon
+          style="cursor: pointer;"
+          title="Nhấn vào để soạn"
+          (click)="editproduct(product.id)"
+        >
+          create
+        </mat-icon>
+      </td>
+      <td>{{ product?.number }}</td>
+      <td>{{ product?.No }}</td>
+      <td>{{ product?.ID }}</td>
+      <td>{{ product?.outsouce company name}}</td>
+      <td>{{product?.Address }}</td>
+      <td>{{ product?.numberphone }}</td>
+      <td>{{ product?.partnercompany }}</td>
+      <td>{{ product?.delete}}</td>
+      <td align="center">
+        <img
+          *ngIf="product?.picture"
+          src="{{ product?.picture }}"
+          height="50"
+        />
+      </td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+.horizontal-view {
+    display: flex;
+    align-items: center;
+}
+
+:host ::ng-deep .space{
+    flex-grow: 1;
+}

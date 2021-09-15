@@ -1,0 +1,54 @@
+<div>
+  <button mat-raised-button color="primary">
+    <mat-icon>add_box</mat-icon>
+    Ecoland
+  </button>
+  <table id="customers" style="border-collapse: collapse;">
+    <tr>
+      <th>パートナー企業</th>
+      <th> 外注企業名</th>
+      <th>
+        表示ボタン
+        <mat-icon style="cursor: pointer;" (click)="sortByCode('down')">
+          arrow_downward
+        </mat-icon>
+        <mat-icon style="cursor: pointer;" (click)="sortByCode('up')">
+          arrow_upward
+        </mat-icon>
+      </th>
+      <th>新規登録ボタン</th>
+     
+    </tr>
+    <tr *ngFor="let partner of partners">
+      <td>
+        <mat-icon
+          style="cursor: pointer;"
+          title="Nhấn vào để xóa"
+          (click)="deleteStudent(student.id)"
+        >
+          clear
+        </mat-icon>
+        &nbsp;
+        <mat-icon
+          style="cursor: pointer;"
+          title="Nhấn vào để soạn"
+          (click)="editStudent(partner.id)"
+        >
+          create
+        </mat-icon>
+      </td>
+      <td>{{ partner?.partner company }}</td>
+      <td>{{ partner?.outsouce company name }}</td>
+      <td>{{ partner?.button }}</td>
+      <td>{{ partner?.newbutton }}</td>
+  
+      <td align="center">
+        <img
+          *ngIf="partner?.picture"
+          src="{{ partner?.picture }}"
+          height="50"
+        />
+      </td>
+    </tr>
+  </table>
+</div>

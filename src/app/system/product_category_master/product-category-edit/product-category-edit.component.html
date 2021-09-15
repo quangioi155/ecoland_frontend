@@ -1,0 +1,152 @@
+<title-component [title]="titleProductCategory"></title-component>
+<div appContainer>
+    <form [formGroup]="productCategoryForm">
+        <table class="custom-table-form">
+            <tr>
+                <th style="width: 15%">ID</th>
+                <th>{{id}}</th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{categoryNameLabel}}</th>
+                <th style="background-color: white">
+                    <input name="categoryName" type="text" pInputText formControlName="categoryName"
+                        [ngClass]="{ 'ng-dirty': submitted && f.categoryName.errors }" maxlength="20" />
+                    <div *ngIf="(submitted && f.categoryName.invalid && f.categoryName.dirty) || (submitted && f.categoryName.errors)"
+                        class="p-error">
+                        <div *ngIf="f.categoryName.errors || f.categoryName.errors.maxlength">{{validation.MES_2}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{collectionFeeNoTaxLabel}}</th>
+                <th>
+                    <label>{{Yen}}</label>
+                    <input numbersOnly name="pickupFeeNoTax" class="number-right" type="text" pInputText maxlength="32"
+                        formControlName="pickupFeeNoTax"
+                        [ngClass]="{ 'ng-dirty':f.pickupFeeNoTax.errors}" />
+                    <div *ngIf="f.pickupFeeNoTax.errors"
+                        class="p-error">
+                        <div *ngIf="f.pickupFeeNoTax.errors">{{validation.MES_2}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{preservedFeeNoTaxLabel}}</th>
+                <th style="background-color: white">
+                    <label>{{Yen}}</label>
+                    <input numbersOnly name="wareHousingFeeNoTax" class="number-right" maxlength="32" type="text"
+                        pInputText formControlName="wareHousingFeeNoTax"
+                        [ngClass]="{ 'ng-dirty': f.wareHousingFeeNoTax.errors }" />
+                    <div *ngIf="f.wareHousingFeeNoTax.errors" class="p-error">
+                        <div *ngIf="f.wareHousingFeeNoTax.errors">{{validation.MES_2}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{importExportFeeNoTax}}</th>
+                <th>
+                    <label>{{Yen}}</label>
+                    <input numbersOnly name="wareHousingTransactionFee" maxlength="32" class="number-right" type="text"
+                        pInputText formControlName="wareHousingTransactionFee"
+                        [ngClass]="{ 'ng-dirty': f.wareHousingTransactionFee.errors}" />
+                    <div *ngIf="f.wareHousingTransactionFee.errors"
+                        class="p-error">
+                        <div *ngIf="f.wareHousingTransactionFee.errors">{{validation.MES_2}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="background-color: white">{{productRankLabel}}</th>
+                <th style="background-color: white">
+                    <app-dropdown-field [data]="dropdownListProductRanks" [form]="productCategoryForm"
+                        [placeholder]="placeholderSelect" optionValue="value" optionLabel="name"
+                        formName="standardRankId">
+                    </app-dropdown-field>
+                </th>
+            </tr>
+            <tr>
+                <th>{{sortingRecyclabesLabel}}</th>
+                <th>
+                    <p-radioButton class="margin-radio" name="recoverableFlag" [label]="recycledFurnitureLabel"
+                        [(ngModel)]="selectedRecoverableFlag" value="true" formControlName="recoverableFlag">
+                    </p-radioButton>
+                    <p-radioButton name="recoverableFlag" [label]="notRecycledFurnitureLabel"
+                        [(ngModel)]="selectedRecoverableFlag" value="false" formControlName="recoverableFlag">
+                    </p-radioButton>
+                    <div *ngIf="(submitted && f.recoverableFlag.invalid && f.recoverableFlag.dirty) || (submitted && f.recoverableFlag.errors)"
+                        class="p-error">
+                        <div *ngIf="f.recoverableFlag.errors">{{validation.MES_9}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{keyWordLabel}}</th>
+                <th>
+                    <input pInputText type="text" name="keywords" formControlName="keywords"
+                        [ngClass]="{ 'ng-dirty': submitted && f.keywords.errors }">
+                    <div *ngIf="(f.keywords.invalid && f.keywords.dirty) || (submitted && f.keywords.errors)"
+                        class="p-error">
+                        <div *ngIf="f.keywords.errors">{{validation.MES_2}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>WEB{{webShowLabel}}</th>
+                <th>
+                    <p-radioButton class=" margin-radio" name="webDispFlag" [label]="webShowLabel" value="true"
+                        formControlName="webDispFlag">
+                    </p-radioButton>
+                    <p-radioButton name="webDispFlag" [label]="webDisable" value="false" formControlName="webDispFlag">
+                    </p-radioButton>
+                    <div *ngIf="(submitted && f.webDispFlag.invalid && f.webDispFlag.dirty) || (submitted && f.webDispFlag.errors)"
+                        class="p-error">
+                        <div *ngIf="f.webDispFlag.errors">{{validation.MES_9}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>{{webID}}</th>
+                <th>
+                    <p-autoComplete formControlName="webSmallCategoryId" [(ngModel)]="webSmallCategoryId"
+                        [suggestions]="filteredCategoryName" (completeMethod)="filterCategoryName($event)" dataKey="id"
+                        field="name" (onSelect)="onSelect($event)">
+                    </p-autoComplete>
+                </th>
+            </tr>
+            <tr>
+                <th>{{imgPathLabel}}</th>
+                <th><input pInputText type="text" name="imgFilePath" formControlName="imgFilePath" /></th>
+            </tr>
+            <tr>
+                <th>{{managementOutLabel}}</th>
+                <th>
+                    <p-radioButton class="margin-radio" name="managementOut" [label]="managementOutLabel" value="true"
+                        formControlName="managementOut"></p-radioButton>
+                    <p-radioButton name="managementOut" [label]="isNotManagementOutLabel" value="false"
+                        formControlName="managementOut">
+                    </p-radioButton>
+                    <div *ngIf="(submitted && f.managementOut.invalid && f.managementOut.dirty) || (submitted && f.managementOut.errors)"
+                        class="p-error">
+                        <div *ngIf="f.managementOut.errors">{{validation.MES_9}}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </form>
+    <app-horizoltal-view [style]="{ padding: '15px 15px' }">
+        <div class="space"></div>
+        <button pButton label="戻る" style="margin-right: 15px" icon="pi pi-arrow-circle-left" class="p-button-secondary"
+            routerLink="/ecoland/product-category-list"></button>
+        <button pButton label="登録" icon="pi pi-arrow-circle-up" class="p-button-info"
+            (click)="editOrCreateProductCategory()"></button>
+    </app-horizoltal-view>
+</div>
+<p-toast position="top-right"></p-toast>

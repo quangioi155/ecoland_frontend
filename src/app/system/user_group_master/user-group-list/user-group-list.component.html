@@ -1,0 +1,65 @@
+<title-component [title]="titleUserGroup"></title-component>
+<div appContainer>
+    <div>
+        <form [formGroup]="searchForm" class="form-search">
+            <app-horizoltal-view>
+                <app-textbox-field [label]="accountNameLabel" [form]="searchForm" formName="groupName">
+                </app-textbox-field>
+                <button pButton [label]="searchLabel" class="p-button-secondary search-btn" icon="pi pi-search"
+                    (click)="onSearch()"></button>
+                <div class="space"></div>
+                <button pButton [label]="registLabel" (click)="registerUserGroup()" class="p-button-secondary regist-btn"
+                    icon="pi pi-plus-circle" style="margin: 0px;"></button>
+            </app-horizoltal-view>
+        </form>
+    </div>
+    <div style="margin-top: 10px;">
+        <app-horizoltal-view>
+            <app-report-page class="report-page" [page]="curentPage"
+                [pageSize]="pageSize" [totalRecord]="totalRecord"></app-report-page>
+            <div class="space"></div>
+            <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" pageLinkSize="10"
+                (onPageChange)="pageClick($event)" #paginator>
+            </p-paginator>
+        </app-horizoltal-view>
+    </div>
+</div>
+<div appContainer>
+    <p-table [columns]="columns" [value]="userGroupList"
+        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" selectionMode="single"
+        [resizableColumns]="true" [scrollable]="true" scrollHeight="600px">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" style="width: {{col.width}}; text-align: center;">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr [pSelectableRow]="data">
+                <td style=" color: rgb(89, 130, 241);width: 5%;" class="click-row" (click)="edit(data.id)">{{data.id}}
+                </td>
+                <td style="width: 20%;">{{data.groupName}}</td>
+                <td style="width: 10%; text-align: center;">{{data.contactCustomerFlag}}</td>
+                <td style="width: 10%; text-align: center;">{{data.driverFlag}}</td>
+                <td style="width: 10%; text-align: center;">{{data.vehicleDispatchFlag}}</td>
+                <td style="width: 10%; text-align: center;">{{data.zecFlag}}</td>
+                <td style="width: 10%; text-align: center;">{{data.manageFlag}}</td>
+                <td style="width: 10%; text-align: center;">{{data.warehouseFlag}}</td>
+                <td style="width: 10%; text-align: center;">{{data.systemFlag}}</td>
+                <td style="text-align: center;">
+                    <button pButton pRipple type="button" icon="pi pi-times" (click)="confirm('top', data.id)"
+                        class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog #cd [style]="{width: '30vw'}" key="positionDialog" [position]="position"
+    rejectButtonStyleClass="p-button-outlined">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton [label]="confirmYes" (click)="cd.accept()" [style]="{width: '80px'}"></button>
+        <button type="button" class="cancel-button" pButton [label]="confirmNo" (click)="cd.reject()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast position="top-right"></p-toast>

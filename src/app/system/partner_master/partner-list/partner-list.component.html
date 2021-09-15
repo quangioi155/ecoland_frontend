@@ -1,0 +1,55 @@
+<title-component [title]="companyGroupLabel"></title-component>
+<div appContainer>
+  <form [formGroup]="searchForm">
+    <app-horizoltal-view>
+      <app-textbox-field [label]="companyLabel" [form]="searchForm" formName="partnerName">
+      </app-textbox-field>
+      <p-checkbox [binary]="true" [label]="mainLabel" formControlName="mainFlag" labelStyleClass="custom-cb"></p-checkbox>
+      <button pButton [label]="searchLabel" class="p-button-secondary search-btn" icon="pi pi-search" (click)="onSearch()"></button>
+      <div class="space"></div>
+      <button pButton [label]="registLabel" routerLink="/ecoland/partner-edit" class="p-button-secondary regist-btn" icon="pi pi-plus-circle"></button>
+    </app-horizoltal-view>
+  </form>
+  <div style="margin-top: 10px;">
+    <app-horizoltal-view>
+      <app-report-page style="font-size: 16px; font-weight: 200;" [page]="curentPage"  [pageSize]="pageSize" [totalRecord]="totalRecord"></app-report-page>
+      <div class="space"></div>
+      <p-paginator [rows]="pageSize" [totalRecords]="totalRecord" [pageLinkSize]="pageLinkSize" (onPageChange)="pageClick($event)" #paginator>
+      </p-paginator>
+    </app-horizoltal-view>
+  </div>
+  <p-table [columns]="columns" selectionMode="single" [value]="dataProvider" styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+  [scrollable]="true" scrollHeight="600px">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let col of columns" [style.width]="col.width" style="text-align: center;">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr [pSelectableRow]="data">
+        <td style="color: rgb(89, 130, 241); width: 4%" (click)="gotoEdit(data.id)"
+          class="click-row">{{data.id}}</td>
+        <td style="width: 20%;" >{{data.partnerName}}</td>
+        <td style="width: 10%;" >{{data.postalCode}}</td>
+        <td style="width: 30%;">{{data.address}}</td>
+        <td style="width: 16%;">{{data.tel}}</td>
+        <td style="width: 16%;">{{data.fax}}</td>
+        <td style="text-align: center; width: 4%;">
+          <button pButton pRipple type="button" icon="pi pi-times" (click)="confirm('top',data.id)"
+            class="p-button-rounded p-button-text p-button-danger"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <!-- pop up -->
+  <p-confirmDialog #cd [style]="{width: '30vw'}" key="positionDialog" [position]="position"
+  rejectButtonStyleClass="p-button-outlined">
+  <ng-template pTemplate="footer">
+    <button type="button" pButton [label]="confirmYes" (click)="cd.accept()" [style]="{width: '80px'}"></button>
+    <button type="button" class="cancel-button" pButton [label]="confirmNo" (click)="cd.reject()"></button>
+  </ng-template>
+  </p-confirmDialog>
+  <p-toast position="top-right"></p-toast>
+</div>
